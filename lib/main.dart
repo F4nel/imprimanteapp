@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:imprimanteapp/stock_repository.dart';
 import 'package:imprimanteapp/stock_repository_impl.dart';
 
-import 'imprimante_widget.dart';
+import 'printer_widget.dart';
 
 void main() {
   GetIt.instance.registerSingleton<StockRepository>(StockRepositoryImpl());
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: colorScheme.onPrimary
         )
       ),
-      home: const ImprimanteWidget(),
+      home: const PrinterWidget(printer: printer),
     );
   }
 }
