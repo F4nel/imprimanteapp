@@ -1,8 +1,12 @@
+import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
+import 'package:imprimanteapp/stock_repository.dart';
+import 'package:imprimanteapp/stock_repository_impl.dart';
 
 import 'imprimante_widget.dart';
 
 void main() {
+  GetIt.instance.registerSingleton<StockRepository>(StockRepositoryImpl());
   runApp(const MyApp());
 }
 
