@@ -1,7 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
+import 'package:imprimanteapp/printer.dart';
 import 'package:imprimanteapp/stock_repository.dart';
 import 'package:imprimanteapp/stock_repository_impl.dart';
+import 'package:imprimanteapp/stock_widget.dart';
 
 import 'printer_widget.dart';
 
@@ -12,7 +14,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: colorScheme.onPrimary
         )
       ),
-      home: const PrinterWidget(printer: printer),
+      home: const StockWidget(),
     );
   }
 }

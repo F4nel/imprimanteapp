@@ -5,11 +5,11 @@ class StockRepositoryImpl implements StockRepository {
 
   @override
   List<Printer> products = [
-    Printer("Powder", 12, DateTime.utc(14, 10, 2024)),
-    Printer("Wire printer", 17, DateTime.utc(10, 10, 2024)),
-    Printer("Wire printer", 24, DateTime.utc(11, 10, 2024)),
-    Printer("Resin printer", 35, DateTime.utc(05, 02, 2023)),
-    Printer("Wire printer", 37, DateTime.utc(20, 07, 2023))
+    Printer("Powder printer", 12, DateTime.utc(2024, 10, 14)),
+    Printer("Wire printer", 17, DateTime.utc(2024, 10, 10)),
+    Printer("Wire printer", 24, DateTime.utc(2024, 10, 11)),
+    Printer("Resin printer", 35, DateTime.utc(2023, 02, 05)),
+    Printer("Wire printer", 37, DateTime.utc(2023, 07, 20))
   ];
 
 }

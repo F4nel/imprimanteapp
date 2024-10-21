@@ -11,9 +11,16 @@ class PrinterWidget extends StatelessWidget {
         padding : const EdgeInsets.all(16.0),
         child: Row (
           children: [
-            Expanded(child: Text(printer.type)),
-            Text("${printer.id}"),
-            Text("${printer.dateTime}"),
+            Expanded(
+                child: Text("Images")),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("${printer.type} #${printer.id}"),
+                    Text("${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}"),
+                  ],
+                )
           ],
         )
     );
