@@ -8,6 +8,9 @@ class StockWidget extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    bool sortById = true;
+    bool sortByType = false;
+    bool sortByDate = false;
     final stockRepository = GetIt.instance<StockRepository>();
     final printers = stockRepository.products
         .where((product) => product.type.isNotEmpty)
