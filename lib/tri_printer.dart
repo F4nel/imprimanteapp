@@ -1,1 +1,1 @@
-enum Printersgit add {id, type, date}
+enum Printers {id, type, date}

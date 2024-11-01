@@ -8,11 +8,11 @@ class PrinterWidget extends StatelessWidget {
   @override
   Widget build ( BuildContext context ) {
     return Padding (
-        padding : const EdgeInsets.all(16.0),
+        padding : const EdgeInsets.all(60.0),
         child: Row (
           children: [
             Expanded(
-                child: Text("Images")),
+                child: getImages("${printer.type}")),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -25,4 +25,18 @@ class PrinterWidget extends StatelessWidget {
         )
     );
   }
+
+  Widget getImages(String types) {
+    if (types == "Powder printer") {
+      return Image(image: AssetImage('images/powder-printer.png'), fit: BoxFit.cover,);
+    }
+    if (types == "Wire printer") {
+      return Image(image: AssetImage('images/wire-printer.png'));
+    }
+    if (types == "Resin printer") {
+      return Image(image: AssetImage('images/resin-printer.png'));
+    }
+    return Image(image: AssetImage('images/image-not-found.png'));
+  }
+
 }
