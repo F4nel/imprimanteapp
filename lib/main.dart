@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:imprimanteapp/printer.dart';
 import 'package:imprimanteapp/stock_repository.dart';
 import 'package:imprimanteapp/stock_repository_impl.dart';
-import 'package:imprimanteapp/stock_widget.dart';
+import 'package:imprimanteapp/stock_sort_by_id_widget.dart';
 import 'package:imprimanteapp/selection_choice_widget.dart';
 
 import 'printer_widget.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: colorScheme.onPrimary
         )
       ),
-      home: const StockWidget(),
+      home: const StockSortByIdWidget(),
     );
   }
 }

@@ -3,8 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:imprimanteapp/printer_widget.dart';
 import 'package:imprimanteapp/stock_repository.dart';
 
-class StockWidget extends StatelessWidget {
-  const StockWidget({super.key});
+class StockSortByIdWidget extends StatelessWidget {
+  const StockSortByIdWidget({super.key});
   
   @override
   Widget build(BuildContext context) {
@@ -12,6 +12,7 @@ class StockWidget extends StatelessWidget {
     final printers = stockRepository.products
         .where((product) => product.type.isNotEmpty)
         .toList();
+    printers.sort((a,b) => a.id.compareTo(b.id));
     
     return Scaffold(
       appBar: AppBar(

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:imprimanteapp/stock_widget.dart';
+import 'package:imprimanteapp/stock_sort_by_id_widget.dart';
 
 class SelectionChoice extends StatefulWidget {
   const SelectionChoice({super.key});
