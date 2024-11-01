@@ -8,11 +8,13 @@ class PrinterWidget extends StatelessWidget {
   @override
   Widget build ( BuildContext context ) {
     return Padding (
-        padding : const EdgeInsets.all(60.0),
+        padding : const EdgeInsets.all(8.0),
         child: Row (
           children: [
             Expanded(
-                child: getImages("${printer.type}")),
+                child: FittedBox(
+            child: getImages("${printer.type}")),
+        ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
