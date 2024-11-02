@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:imprimanteapp/printer.dart';
 import 'package:imprimanteapp/printer_widget.dart';
-import 'package:imprimanteapp/stock_repository.dart';
 
 class StockRepositoryWidget extends StatelessWidget {
   final List<Printer> printerSorted;
