@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:imprimanteapp/printer.dart';
 import 'package:imprimanteapp/printer_widget.dart';
 import 'package:imprimanteapp/stock_repository.dart';
 
-class StockSortByDateWidget extends StatelessWidget {
-  const StockSortByDateWidget({super.key});
+class StockRepositoryWidget extends StatelessWidget {
+  final List<Printer> printerSorted;
+  const StockRepositoryWidget({super.key, required this.printerSorted});
 
   @override
   Widget build(BuildContext context) {
-    final stockRepository = GetIt.instance<StockRepository>();
-    final printers = stockRepository.products
-        .where((product) => product.type.isNotEmpty)
-        .toList();
-    printers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
 
     return MaterialApp(
       home: Scaffold(
@@ -20,9 +17,9 @@ class StockSortByDateWidget extends StatelessWidget {
           const SizedBox(height: 16),
           Expanded(
               child: ListView.builder(
-                  itemCount: printers.length,
+                  itemCount: printerSorted.length,
                   itemBuilder : (BuildContext context, int index) {
-                    return PrinterWidget(printer: printers[index]);
+                    return PrinterWidget(printer: printerSorted[index]);
                   }))
         ]),
       ),

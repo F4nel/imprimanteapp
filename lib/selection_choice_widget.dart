@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imprimanteapp/stock_repository.dart';
-import 'package:imprimanteapp/stock_repository_impl.dart';
-import 'package:imprimanteapp/stock_sort_by_date_widget.dart';
-import 'package:imprimanteapp/stock_sort_by_id_widget.dart';
-import 'package:imprimanteapp/stock_sort_by_type_widget.dart';
+import 'package:imprimanteapp/stock_repository_widget.dart';
 
 
 class SelectionChoice extends StatefulWidget {
@@ -17,25 +14,34 @@ class SelectionChoice extends StatefulWidget {
 
 class _SelectionChoiceState extends State<SelectionChoice> {
   Set<String> _selected = {'id'};
-  Widget _currentWidget = const StockSortByIdWidget();
+  Widget _currentWidget = ErrorWidget.withDetails(); //A modifier plus tars
 
   void updateSelection(Set<String> newSelection) {
     setState(() {
       _selected = newSelection;
 
+      final stockRepository = GetIt.instance<StockRepository>();
+      final printers = stockRepository.products
+          .where((product) => product.type.isNotEmpty)
+          .toList();
+
       // Met à jour le widget actuel en fonction de la sélection
       if (_selected.first == 'id') {
-        _currentWidget = const StockSortByIdWidget();
+        printers.sort((a,b) => a.id.compareTo(b.id));
+        _currentWidget = StockRepositoryWidget(printerSorted: printers,);
       } else if (_selected.first == 'type') {
-        _currentWidget = const StockSortByTypeWidget();
+        printers.sort((a,b) => a.type.compareTo(b.type));
+        _currentWidget = StockRepositoryWidget(printerSorted: printers,);
       } else if (_selected.first == 'date') {
-        _currentWidget = const StockSortByDateWidget();
+        printers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
+        _currentWidget = StockRepositoryWidget(printerSorted: printers,);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Hello World"),
