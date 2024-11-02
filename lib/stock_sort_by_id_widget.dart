@@ -13,20 +13,19 @@ class StockSortByIdWidget extends StatelessWidget {
         .where((product) => product.type.isNotEmpty)
         .toList();
     printers.sort((a,b) => a.id.compareTo(b.id));
-    
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("3D Printers"),
+
+    return MaterialApp(
+      home: Scaffold(
+        body: Column(children: [
+          const SizedBox(height: 16),
+          Expanded(
+              child: ListView.builder(
+                  itemCount: printers.length,
+                  itemBuilder : (BuildContext context, int index) {
+                    return PrinterWidget(printer: printers[index]);
+                  }))
+        ]),
       ),
-      body:
-      Column(children: [
-        const SizedBox(height: 16),
-        Expanded(
-            child: ListView.builder(
-                itemCount: printers.length,
-                itemBuilder : (BuildContext context, int index) {
-                  return PrinterWidget(printer: printers[index]);
-                }))
-      ]));
+    );
   }
 }

@@ -3,8 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:imprimanteapp/printer_widget.dart';
 import 'package:imprimanteapp/stock_repository.dart';
 
-class StockSortByTypeWidget extends StatelessWidget {
-  const StockSortByTypeWidget({super.key});
+class StockSortByDateWidget extends StatelessWidget {
+  const StockSortByDateWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,9 @@ class StockSortByTypeWidget extends StatelessWidget {
         .toList();
     printers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
 
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("3D Printers"),
-        ),
-        body:
-        Column(children: [
+    return MaterialApp(
+      home: Scaffold(
+        body: Column(children: [
           const SizedBox(height: 16),
           Expanded(
               child: ListView.builder(
@@ -27,6 +24,8 @@ class StockSortByTypeWidget extends StatelessWidget {
                   itemBuilder : (BuildContext context, int index) {
                     return PrinterWidget(printer: printers[index]);
                   }))
-        ]));
+        ]),
+      ),
+    );
   }
 }
