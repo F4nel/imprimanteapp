@@ -19,17 +19,9 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
   Widget build(BuildContext context) {
     final printer = ModalRoute.of(context)!.settings.arguments as Printer;
     final stockPresenter = context.watch<StockPresenter>();
-    final printers = stockPresenter.printers
-        .where((products) => products.type.isNotEmpty)
-        .toList();
 
     String dropdownValue = printer.type;
-
-    List<String> typesList = printers
-        .map((product) => product.type) // On extrait uniquement le type
-        .where((type) => type.isNotEmpty) // On filtre les types non vides
-        .toSet() // Convertit en Set pour éliminer les doublons
-        .toList(); // Puis reconvertit en List
+    final List<String> typesList = ["Powder printer", "Wire printer", "Resin printer"];
 
 
 
