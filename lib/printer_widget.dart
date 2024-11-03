@@ -7,25 +7,37 @@ class PrinterWidget extends StatelessWidget {
 
   @override
   Widget build ( BuildContext context ) {
-    return Padding (
-        padding : const EdgeInsets.all(8.0),
+    return InkWell(
+      child: Container (
+        color: Colors.blue,
         child: Row (
           children: [
             Expanded(
-                child: FittedBox(
-            child: getImages("${printer.type}")),
-        ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("${printer.type} #${printer.id}"),
-                    Text("${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}"),
-                  ],
+              child: FittedBox(
+                  child: getImages("${printer.type}")),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  child: Column(
+                    children: [
+                      Text("${printer.type} #${printer.id}"),
+                      Text("${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}"),
+                    ],
+                  ),
                 )
+              ],
+            )
           ],
-        )
+        ),
+      ),
+      onTap: () {
+        Navigator.pushNamed(context, '/details', arguments: printer);
+      },
     );
+
   }
 
   Widget getImages(String types) {

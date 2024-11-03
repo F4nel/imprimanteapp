@@ -9,8 +9,8 @@ class StockRepositoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-      home: Scaffold(
+    return Container(
+      child: Scaffold(
         body: Column(children: [
           const SizedBox(height: 16),
           Expanded(
