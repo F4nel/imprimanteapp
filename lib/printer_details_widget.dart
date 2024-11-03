@@ -13,12 +13,12 @@ class PrinterDetailsWidget extends StatefulWidget {
 
 class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
 
-  late String _dropdownValue;
-
   @override
   Widget build(BuildContext context) {
     final printer = ModalRoute.of(context)!.settings.arguments as Printer;
     final stockRepository = GetIt.instance<StockRepository>();
+
+    String dropdownValue = printer.type;
 
     List<String> typesList = stockRepository.products
         .map((product) => product.type) // On extrait uniquement le type
@@ -30,7 +30,7 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(printer.type),
+        title: Text("${printer.type} #${printer.id}"),
       ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -44,11 +44,11 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
                     child: Text(value),
                   );
                 }).toList(),
-                value: _dropdownValue,
+                value: dropdownValue,
                 onChanged: (String? value) {
                   // This is called when the user selects an item.
                   setState(() {
-                    _dropdownValue = value!;
+                    dropdownValue = value!;
                   });
                 },
               isExpanded: true,

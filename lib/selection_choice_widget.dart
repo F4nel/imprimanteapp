@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imprimanteapp/stock_repository.dart';
-import 'package:imprimanteapp/stock_repository_widget.dart';
+import 'package:imprimanteapp/stock_widget.dart';
 
 
 class SelectionChoice extends StatefulWidget {
@@ -28,13 +28,13 @@ class _SelectionChoiceState extends State<SelectionChoice> {
       // Met à jour le widget actuel en fonction de la sélection
       if (_selected.first == 'id') {
         printers.sort((a,b) => a.id.compareTo(b.id));
-        _currentWidget = StockRepositoryWidget(printerSorted: printers,);
+        _currentWidget = StockWidget(printers: printers,);
       } else if (_selected.first == 'type') {
         printers.sort((a,b) => a.type.compareTo(b.type));
-        _currentWidget = StockRepositoryWidget(printerSorted: printers,);
+        _currentWidget = StockWidget(printers: printers,);
       } else if (_selected.first == 'date') {
         printers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
-        _currentWidget = StockRepositoryWidget(printerSorted: printers,);
+        _currentWidget = StockWidget(printers: printers,);
       }
     });
   }
