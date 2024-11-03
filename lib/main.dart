@@ -8,7 +8,6 @@ import 'package:imprimanteapp/selection_choice_widget.dart';
 import 'printer_widget.dart';
 
 void main() {
-  GetIt.instance.registerSingleton<StockRepository>(StockRepositoryImpl());
   runApp(const MyApp());
 }
 
