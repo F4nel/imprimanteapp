@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:imprimanteapp/printer.dart';
+import 'package:imprimanteapp/stock_presenter.dart';
 import 'package:imprimanteapp/stock_repository.dart';
 import 'package:imprimanteapp/stock_widget.dart';
+import 'package:provider/provider.dart';
 
 
 class SelectionChoice extends StatefulWidget {
@@ -20,24 +23,23 @@ class _SelectionChoiceState extends State<SelectionChoice> {
     setState(() {
       _selected = newSelection;
 
-      final stockRepository = GetIt.instance<StockRepository>();
-      final printers = stockRepository.products
-          .where((product) => product.type.isNotEmpty)
-          .toList();
+      final stockPresenter = context.read<StockPresenter>();
+      List<Printer> printers = stockPresenter.printers;
 
-      // Met à jour le widget actuel en fonction de la sélection
+      // Appliquer le tri en fonction de la sélection
       if (_selected.first == 'id') {
-        printers.sort((a,b) => a.id.compareTo(b.id));
-        _currentWidget = StockWidget(printers: printers,);
+        printers.sort((a, b) => a.id.compareTo(b.id));
       } else if (_selected.first == 'type') {
-        printers.sort((a,b) => a.type.compareTo(b.type));
-        _currentWidget = StockWidget(printers: printers,);
+        printers.sort((a, b) => a.type.compareTo(b.type));
       } else if (_selected.first == 'date') {
-        printers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
-        _currentWidget = StockWidget(printers: printers,);
+        printers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
       }
+
+      // Mettre à jour l'affichage en fonction de la liste triée
+      _currentWidget = StockWidget(printers: printers);
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

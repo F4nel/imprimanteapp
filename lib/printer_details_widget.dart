@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imprimanteapp/printer.dart';
+import 'package:imprimanteapp/stock_presenter.dart';
 import 'package:imprimanteapp/stock_repository.dart';
+import 'package:provider/provider.dart';
 
 class PrinterDetailsWidget extends StatefulWidget {
   const PrinterDetailsWidget({super.key});
@@ -16,11 +18,14 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     final printer = ModalRoute.of(context)!.settings.arguments as Printer;
-    final stockRepository = GetIt.instance<StockRepository>();
+    final stockPresenter = context.watch<StockPresenter>();
+    final printers = stockPresenter.printers
+        .where((products) => products.type.isNotEmpty)
+        .toList();
 
     String dropdownValue = printer.type;
 
-    List<String> typesList = stockRepository.products
+    List<String> typesList = printers
         .map((product) => product.type) // On extrait uniquement le type
         .where((type) => type.isNotEmpty) // On filtre les types non vides
         .toSet() // Convertit en Set pour éliminer les doublons
@@ -49,19 +54,23 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
                   // This is called when the user selects an item.
                   setState(() {
                     dropdownValue = value!;
+                    stockPresenter.setType(printer, value);
                   });
                 },
               isExpanded: true,
             ),
             TextFormField(
               initialValue: "${printer.id}",
-            )
+              onChanged: (text) {
+                int? newId = int.tryParse(text);
+                if (newId != null) {
+                  stockPresenter.setId(printer, newId);
+                }
+              },
+            ),
           ],
         ),
       ),
     );
-
-    throw UnimplementedError();
   }
-
 }

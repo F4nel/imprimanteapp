@@ -1,14 +1,21 @@
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
+import 'package:imprimanteapp/stock_presenter.dart';
+import 'package:imprimanteapp/stock_presenter_impl.dart';
 import 'package:imprimanteapp/stock_repository.dart';
 import 'package:imprimanteapp/stock_repository_impl.dart';
 import 'package:imprimanteapp/selection_choice_widget.dart';
+import 'package:provider/provider.dart';
 
 
 import 'printer_widget.dart';
 
 void main() {
-  runApp(const MyApp());
+  GetIt.instance.registerSingleton<StockRepository>(StockRepositoryImpl());
+  runApp(ChangeNotifierProvider<StockPresenter>(
+      create: (context) => StockPresenterImpl(),
+    child: const MyApp())
+  );
 }
 
 class MyApp extends StatelessWidget {
