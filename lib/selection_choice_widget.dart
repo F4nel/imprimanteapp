@@ -17,32 +17,28 @@ class SelectionChoice extends StatefulWidget {
 
 class _SelectionChoiceState extends State<SelectionChoice> {
   Set<String> _selected = {'id'};
-  Widget _currentWidget = ErrorWidget.withDetails(); //A modifier plus tars
+
 
   void updateSelection(Set<String> newSelection) {
     setState(() {
       _selected = newSelection;
-
-      final stockPresenter = context.read<StockPresenter>();
-      List<Printer> printers = stockPresenter.printers;
-
-      // Appliquer le tri en fonction de la sélection
-      if (_selected.first == 'id') {
-        printers.sort((a, b) => a.id.compareTo(b.id));
-      } else if (_selected.first == 'type') {
-        printers.sort((a, b) => a.type.compareTo(b.type));
-      } else if (_selected.first == 'date') {
-        printers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
-      }
-
-      // Mettre à jour l'affichage en fonction de la liste triée
-      _currentWidget = StockWidget(printers: printers);
     });
   }
 
 
   @override
   Widget build(BuildContext context) {
+
+    final stockPresenter = context.watch<StockPresenter>();
+    List<Printer> printers = stockPresenter.printers;
+    // Appliquer le tri en fonction de la sélection
+    if (_selected.first == 'id') {
+      printers.sort((a, b) => a.id.compareTo(b.id));
+    } else if (_selected.first == 'type') {
+      printers.sort((a, b) => a.type.compareTo(b.type));
+    } else if (_selected.first == 'date') {
+      printers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -70,7 +66,7 @@ class _SelectionChoiceState extends State<SelectionChoice> {
             onSelectionChanged: updateSelection,
           ),
           Expanded(
-            child: _currentWidget, // Affiche le widget sélectionné
+            child: StockWidget(printers: printers), // Affiche le widget sélectionné
           ),
         ],
       ),
