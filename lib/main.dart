@@ -54,7 +54,13 @@ class MyApp extends StatelessWidget {
           foregroundColor: colorScheme.onPrimary
         )*/
       ),
-      home: const SelectionChoice(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('3D Printers'),
+        ),
+        body: const SelectionChoice(),
+      ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

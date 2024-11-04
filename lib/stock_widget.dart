@@ -15,6 +15,7 @@ class StockWidget extends StatelessWidget {
     return ChangeNotifierProvider<StockPresenter>.value(
       value: context.read<StockPresenter>(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: '/stock',
         routes: {
           '/stock': (context) => StockRepositoryWidget(printerSorted: printers),

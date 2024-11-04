@@ -9,18 +9,13 @@ class StockRepositoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      child: Scaffold(
-        body: Column(children: [
-          const SizedBox(height: 16),
-          Expanded(
-              child: ListView.builder(
-                  itemCount: printerSorted.length,
-                  itemBuilder : (BuildContext context, int index) {
-                    return PrinterWidget(printer: printerSorted[index]);
-                  }))
-        ]),
-      ),
-    );
+    return Column(children: [
+      Expanded(
+          child: ListView.builder(
+              itemCount: printerSorted.length,
+              itemBuilder : (BuildContext context, int index) {
+                return PrinterWidget(printer: printerSorted[index]);
+              }))
+    ]);
   }
 }

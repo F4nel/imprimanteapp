@@ -9,28 +9,35 @@ class PrinterWidget extends StatelessWidget {
   Widget build ( BuildContext context ) {
     return InkWell(
       child: Container (
-        color: Colors.blue,
-        child: Row (
-          children: [
-            Expanded(
-              child: FittedBox(
-                  child: getImages("${printer.type}")),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
+        height: 100,
+        margin: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(5.0),
+        child: Scaffold(
+          body: Row (
+            children: [
+              Flexible(
+                flex: 1,
+                child: FittedBox(
+                    child: getImages("${printer.type}")
+                ),
+              ),
+              Flexible(
+                  flex: 2,
                   child: Column(
                     children: [
-                      Text("${printer.type} #${printer.id}"),
-                      Text("${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}"),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child:
+                        Text(" ${printer.type} #${printer.id} \n ${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}",
+                          textAlign: TextAlign.start,
+                          textDirection: TextDirection.ltr,
+                        ),
+                      )
                     ],
-                  ),
-                )
-              ],
-            )
-          ],
+                  )
+              ),
+            ],
+          ),
         ),
       ),
       onTap: () {

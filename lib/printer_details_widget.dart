@@ -30,25 +30,25 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
         title: Text("${printer.type} #${printer.id}"),
       ),
       body: Padding(
-          padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DropdownButton<String>(
-                items: typesList.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                value: dropdownValue,
-                onChanged: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue = value!;
-                    stockPresenter.setType(printer, value);
-                  });
-                },
+              items: typesList.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              value: dropdownValue,
+              onChanged: (String? value) {
+                // This is called when the user selects an item.
+                setState(() {
+                  dropdownValue = value!;
+                  stockPresenter.setType(printer, value);
+                });
+              },
               isExpanded: true,
             ),
             TextFormField(
@@ -60,6 +60,7 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
                 }
               },
             ),
+
           ],
         ),
       ),
