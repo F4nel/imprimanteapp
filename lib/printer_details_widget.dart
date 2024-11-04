@@ -23,14 +23,26 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
     String dropdownValue = printer.type;
     final List<String> typesList = ["Powder printer", "Wire printer", "Resin printer"];
 
-
+    void selectDate(BuildContext context) async {
+      final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: printer.dateTime, // Refer step 1
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2025),
+      );
+      if (picked != null) {
+        setState(() {
+          stockPresenter.setStartDate(printer, picked);
+        });
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
         title: Text("${printer.type} #${printer.id}"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(25.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -51,6 +63,7 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
               },
               isExpanded: true,
             ),
+
             TextFormField(
               initialValue: "${printer.id}",
               onChanged: (text) {
@@ -60,7 +73,15 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
                 }
               },
             ),
+            ElevatedButton(
+              onPressed: () => selectDate(context),
+              child: const Text('Start date'),
+            ),
 
+            ElevatedButton(
+              onPressed: () => stockPresenter.scheduleMaintenance(printer),
+              child: const Text('Schedule Maintenance')
+              ,),
           ],
         ),
       ),
