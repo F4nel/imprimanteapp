@@ -7,8 +7,7 @@ import 'package:imprimanteapp/stock_repository_widget.dart';
 import 'package:provider/provider.dart';
 
 class StockWidget extends StatelessWidget {
-  final List<Printer> printers;
-  const StockWidget({super.key, required this.printers});
+  const StockWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class StockWidget extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/stock',
         routes: {
-          '/stock': (context) => StockRepositoryWidget(printerSorted: printers),
+          '/stock': (context) => const StockRepositoryWidget(),
           '/details': (context) => const PrinterDetailsWidget(),
         },
       ),

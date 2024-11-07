@@ -8,64 +8,13 @@ import 'package:imprimanteapp/stock_widget.dart';
 import 'package:provider/provider.dart';
 
 
-class SelectionChoice extends StatefulWidget {
+class SelectionChoice extends StatelessWidget {
   const SelectionChoice({super.key});
-
-  @override
-  State<SelectionChoice> createState() => _SelectionChoiceState();
-}
-
-class _SelectionChoiceState extends State<SelectionChoice> {
-  Set<String> _selected = {'id'};
-
-
-  void updateSelection(Set<String> newSelection) {
-    setState(() {
-      _selected = newSelection;
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
 
-    final stockPresenter = context.watch<StockPresenter>();
-    List<Printer> printers = stockPresenter.printers;
-    // Appliquer le tri en fonction de la sélection
-    if (_selected.first == 'id') {
-      printers.sort((a, b) => a.id.compareTo(b.id));
-    } else if (_selected.first == 'type') {
-      printers.sort((a, b) => a.type.compareTo(b.type));
-    } else if (_selected.first == 'date') {
-      printers.sort((a, b) => a.dateTime.compareTo(b.dateTime));
-    }
-
-    return Column(
-          children: [
-            SegmentedButton(
-              expandedInsets: const EdgeInsets.all(15.0),
-              multiSelectionEnabled: false,
-              segments: const <ButtonSegment<String>>[
-                ButtonSegment<String>(
-                  value: 'id',
-                  label: Text('id'),
-                ),
-                ButtonSegment<String>(
-                  value: 'type',
-                  label: Text('type'),
-                ),
-                ButtonSegment<String>(
-                  value: 'date',
-                  label: Text('date'),
-                ),
-              ],
-              selected: _selected,
-              onSelectionChanged: updateSelection,
-            ),
-            Expanded(
-              child: StockWidget(printers: printers), // Affiche le widget sélectionné
-            ),
-          ]
-    );
+    return const StockWidget();
   }
+
 }

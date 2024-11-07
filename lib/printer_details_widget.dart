@@ -38,6 +38,9 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("${printer.type} #${printer.id}"),
+      ),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -77,7 +80,9 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
               },
             ),
             const SizedBox(height: 30,),
-            InputDecorator(
+            Material(
+              elevation:10,
+              child: InputDecorator(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -96,22 +101,24 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
                 Row(
                   children: [
                     Flexible(
-                      fit: FlexFit.tight,
-                      flex :5,
+                        fit: FlexFit.tight,
+                        flex :5,
                         child: Text("${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}")
                     ),
                     Flexible(
-                      flex: 1,
+                        flex: 1,
                         child: IconButton(
-                          focusColor: Colors.grey,
+                            focusColor: Colors.grey,
                             onPressed: () => selectDate(context),
                             icon: const Icon(Icons.calendar_month))
                     ),
                   ],
                 ),
               ),
-            const SizedBox(height: 16,),
-            ElevatedButton(
+            ),
+            const SizedBox(height: 20),
+            Padding(padding: const EdgeInsets.only(left: 160.0),
+            child: ElevatedButton(
               style: const ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(Colors.deepPurple),
               ),
@@ -119,7 +126,7 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
               child: const Text(
                 'Schedule Maintenance',
                 style: TextStyle(color: Colors.white),)
-              ,),
+              ,),)
           ],
         ),
       ),
