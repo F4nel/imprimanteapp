@@ -29,22 +29,28 @@ class StockPresenterImpl extends StockPresenter {
 
   @override
   void scheduleMaintenance(Printer printer) {
+    DateTime now = DateTime.now();
+    DateTime nextMonday = now.add(Duration(days: (8 - now.weekday) % 7));
+
+    DateTime startTime = DateTime(nextMonday.year, nextMonday.month, nextMonday.day, 8, 0);
+    DateTime endTime = DateTime(nextMonday.year, nextMonday.month, nextMonday.day, 12, 0);
+
     final intent = AndroidIntent(
-      action: 'android.intent.action.INSERT', // Important
-      data: 'content://com.android.calendar/event', // Important
-      type: "vnd.android.cursor.dir/event", // Important
+      action: 'android.intent.action.INSERT',
+      data: 'content://com.android.calendar/events',
+      type: "vnd.android.cursor.dir/event",
       arguments: <String, dynamic>{
-        'title': 'Schedule Maintenance for printer ${printer.id}',
-        'allDay': true,
-        'beginTime': DateTime.now()?.millisecondsSinceEpoch,
-        'endTime': DateTime.now()?.millisecondsSinceEpoch ??
-            DateTime.now().microsecondsSinceEpoch + 3600000 * 2,
+        'title': 'Powder printer #${printer.id} maintenance',
+        'beginTime': startTime.millisecondsSinceEpoch,
+        'endTime': endTime.millisecondsSinceEpoch,
         'hasAlarm': 1,
         'calendar_id': 1,
         'eventTimezone': 'Europe/Berlin'
       },
     );
+
     intent.launchChooser("Choose an App to save the Date");
   }
+
 
 }
