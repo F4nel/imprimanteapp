@@ -38,33 +38,36 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("${printer.type} #${printer.id}"),
-      ),
+      resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.all(25.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DropdownButton<String>(
-              items: typesList.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              value: dropdownValue,
-              onChanged: (String? value) {
-                // This is called when the user selects an item.
-                setState(() {
-                  dropdownValue = value!;
-                  stockPresenter.setType(printer, value);
-                });
-              },
-              isExpanded: true,
-            ),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                items: typesList.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                value: dropdownValue,
+                onChanged: (String? value) {
+                  // This is called when the user selects an item.
+                  setState(() {
+                    dropdownValue = value!;
+                    stockPresenter.setType(printer, value);
+                  });
+                },
+                isExpanded: true,
+              ),
 
+            const SizedBox(height: 10,),
             TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Id',
+              ),
               initialValue: "${printer.id}",
               onChanged: (text) {
                 int? newId = int.tryParse(text);
@@ -73,14 +76,49 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
                 }
               },
             ),
+            const SizedBox(height: 30,),
+            InputDecorator(
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 2.0,
+                      color: Colors.deepPurple,
+                    ),
+                  ),
+                  labelStyle: TextStyle(
+                    color: Colors.deepPurple,
+                    backgroundColor: Color(0xFFF3E5F5),
+                  ),
+                  labelText: 'Start date',
+                  border: OutlineInputBorder(),
+                ),
+                child:
+                Row(
+                  children: [
+                    Flexible(
+                      fit: FlexFit.tight,
+                      flex :5,
+                        child: Text("${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}")
+                    ),
+                    Flexible(
+                      flex: 1,
+                        child: IconButton(
+                          focusColor: Colors.grey,
+                            onPressed: () => selectDate(context),
+                            icon: const Icon(Icons.calendar_month))
+                    ),
+                  ],
+                ),
+              ),
+            const SizedBox(height: 16,),
             ElevatedButton(
-              onPressed: () => selectDate(context),
-              child: const Text('Start date'),
-            ),
-
-            ElevatedButton(
+              style: const ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.deepPurple),
+              ),
               onPressed: () => stockPresenter.scheduleMaintenance(printer),
-              child: const Text('Schedule Maintenance')
+              child: const Text(
+                'Schedule Maintenance',
+                style: TextStyle(color: Colors.white),)
               ,),
           ],
         ),

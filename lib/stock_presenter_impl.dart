@@ -37,14 +37,13 @@ class StockPresenterImpl extends StockPresenter {
         'title': 'Schedule Maintenance for printer ${printer.id}',
         'allDay': true,
         'beginTime': DateTime.now()?.millisecondsSinceEpoch,
-        'endTime': DateTime.utc(2030,12,31)?.millisecondsSinceEpoch ??
+        'endTime': DateTime.now()?.millisecondsSinceEpoch ??
             DateTime.now().microsecondsSinceEpoch + 3600000 * 2,
         'hasAlarm': 1,
         'calendar_id': 1,
         'eventTimezone': 'Europe/Berlin'
       },
     );
-
     intent.launchChooser("Choose an App to save the Date");
   }
 

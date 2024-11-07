@@ -17,9 +17,7 @@ class PrinterWidget extends StatelessWidget {
             children: [
               Flexible(
                 flex: 1,
-                child: FittedBox(
-                    child: getImages("${printer.type}")
-                ),
+                child: getImages("${printer.type}")
               ),
               Flexible(
                   flex: 2,
