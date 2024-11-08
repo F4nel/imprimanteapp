@@ -39,37 +39,44 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("${printer.type} #${printer.id}"),
+        title: Text("${printer.type} #${printer.id}",
+        style: const TextStyle(fontSize: 25.0),),
       ),
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DropdownButton<String>(
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                items: typesList.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                value: dropdownValue,
-                onChanged: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue = value!;
-                    stockPresenter.setType(printer, value);
-                  });
-                },
-                isExpanded: true,
+            DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                labelText: 'Type',
+                filled: true,
               ),
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              items: typesList.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              value: dropdownValue,
+              onChanged: (String? value) {
+                // This is called when the user selects an item.
+                setState(() {
+                  dropdownValue = value!;
+                  stockPresenter.setType(printer, value);
+                });
+              },
+              isExpanded: true,
+            ),
 
-            const SizedBox(height: 10,),
+            const SizedBox(height: 30,),
+
             TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Id',
+                filled: true,
               ),
               initialValue: "${printer.id}",
               onChanged: (text) {
@@ -116,7 +123,9 @@ class _PrinterDetailsWidget extends State<PrinterDetailsWidget> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+
+            const SizedBox(height: 30,),
+
             Padding(padding: const EdgeInsets.only(left: 160.0),
             child: ElevatedButton(
               style: const ButtonStyle(

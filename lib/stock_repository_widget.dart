@@ -39,7 +39,8 @@ class _StockRepositoryState extends State<StockRepositoryWidget>{
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('3D Printers'),
+        title: const Text('3D Printers',
+          style: TextStyle(fontSize: 30.0),),
       ),
       body: Column(children: [
         SegmentedButton(

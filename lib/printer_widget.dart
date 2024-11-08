@@ -17,8 +17,9 @@ class PrinterWidget extends StatelessWidget {
             children: [
               Flexible(
                 flex: 1,
-                child: getImages("${printer.type}")
+                child: getImages(printer.type)
               ),
+              const SizedBox(width: 25.0,),
               Flexible(
                   flex: 2,
                   child: Column(
@@ -26,9 +27,29 @@ class PrinterWidget extends StatelessWidget {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child:
-                        Text(" ${printer.type} #${printer.id} \n ${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}",
-                          textAlign: TextAlign.start,
-                          textDirection: TextDirection.ltr,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start, // Assurer un alignement à gauche
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "${printer.type} #${printer.id}",
+                                  textAlign: TextAlign.start,
+                                  textDirection: TextDirection.ltr,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "${printer.dateTime.day}/${printer.dateTime.month}/${printer.dateTime.year}",
+                                  style: const TextStyle(color: Colors.grey), // Changer la couleur ici
+                                  textAlign: TextAlign.start,
+                                  textDirection: TextDirection.ltr,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       )
                     ],
